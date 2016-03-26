@@ -1,0 +1,23 @@
+{
+  "name": "kuruman-node",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.13.4",
+    "jade": "1.11.0",
+    "mongoskin": "2.0.3",
+    "stylus": "0.54.2"
+  },
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "mocha": "2.4.5",
+    "superagent": "1.8.3"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha test"
+  },
+  "author": "cynosure",
+  "license": "MIT"
+}
