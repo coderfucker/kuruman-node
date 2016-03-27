@@ -1,14 +1,18 @@
 var express = require('express')
-  , favicon = require('serve-favicon')
   , morgan = require('morgan')
   , http = require('http')
-  , path = require('path')
+  , path = require('path');
+
+// middleware
+var favicon = require('serve-favicon')
   , methodOverride = require('method-override')
   , bodyParser = require('body-parser')
   , cookieParser = require('cookie-parser')
   , session = require('express-session')
-  , errorHandler = require('errorhandler')
-  , mongoskin = require('mongoskin')
+  , errorHandler = require('errorhandler');
+
+// express model
+var mongoskin = require('mongoskin')
   , dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog'
   , db = mongoskin.db(dbUrl, {safe: true})
   , collections = {
