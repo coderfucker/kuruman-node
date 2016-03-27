@@ -41,7 +41,6 @@ app.use(session({
   secret: '2C44774A-D649-4D44-9535-46E296EF984F', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
 }));
 app.use(methodOverride());
 app.use(require('stylus').middleware(__dirname + '/public'));
@@ -53,6 +52,15 @@ app.use(function(req, res, next){
   next();
 });
 
+// authorization
+var authorize = function(req, res, next) {
+  console.log('auth====>', req.session);
+  if(req.session && req.session.admin)
+    return next();
+  else
+    return res.sendStatus(401);
+};
+
 // dev 
 if('development' === app.get('env')) {
   app.use(errorHandler());
@@ -61,10 +69,11 @@ if('development' === app.get('env')) {
 app.use(router);
 app.get('/', routes.index);
 app.get('/login', routes.user.login);
+app.post('/login', routes.user.authenticate);
 app.get('/logout', routes.user.logout);
-app.get('/admin', routes.article.admin);
-app.get('/post', routes.article.post);
-app.post('/post', routes.article.postArticle);
+app.get('/admin', authorize, routes.article.admin);
+app.get('/post', authorize,routes.article.post);
+app.post('/post', authorize, routes.article.postArticle);
 app.get('/articles/:slug', routes.article.show);
 
 // rest api routes

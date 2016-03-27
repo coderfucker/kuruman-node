@@ -16,6 +16,7 @@ exports.logout = function(req, res, next) {
 
 // post authenticate route
 exports.authenticate = function(req, res, next){
+  console.log('cyn', req.body);
   if(!req.body.email || !req.body.password)
     return res.render('login', {error: 'please enter your email and password.'});
   req.collections.users.findOne({
@@ -26,6 +27,7 @@ exports.authenticate = function(req, res, next){
     if(!user) return res.render('login', {error: 'incorrect email & password combination.'});
     req.session.user = user;
     req.session.admin = user.admin;
+    console.log('====>', req.session);
     res.redirect('/admin');
   });
 };

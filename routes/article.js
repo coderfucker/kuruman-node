@@ -70,6 +70,7 @@ exports.postArticle = function(req, res, next){
 
 // get admin page
 exports.admin = function(req, res, next){
+  console.log('article', req.session);
   req.collections.articles.find({}, {sort: {_id: -1}}).toArray(function(error, articles){
     if(error) return next(error);
     res.render('admin', {articles: articles});
