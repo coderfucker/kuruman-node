@@ -12,13 +12,9 @@ var favicon = require('serve-favicon')
   , errorHandler = require('errorhandler');
 
 // express model
-var mongoskin = require('mongoskin')
+var mongoose= require('mongoose')
   , dbUrl = process.env.MONGOHQ_URL || 'mongodb://@localhost:27017/blog'
-  , db = mongoskin.db(dbUrl, {safe: true})
-  , collections = {
-      articles: db.collection('articles'),
-      users: db.collection('users')
-    };
+  , db = mongoose.connect(dbUrl, {safe: true});
 
 var routes = require('./routes');
 var app = express();
@@ -26,8 +22,8 @@ var router = express.Router();
 app.locals.appTitle = 'kuruman';
 
 app.use(function(req, res, next){
-  if(!collections.articles || !collections.users) return next(new Error('no collections'));
-  req.collections = collections;
+  if(!models.Article || !models.User) return next(new Error('no collections'));
+  req.models= models;
   return next();
 });
 
@@ -81,6 +77,7 @@ app.post('/post', authorize, routes.article.postArticle);
 app.get('/articles/:slug', routes.article.show);
 
 // rest api routes
+app.all('/api', authorize);
 app.get('/api/articles', routes.article.list);
 app.post('/api/articles', routes.article.add);
 app.put('/api/articles/:id', routes.article.edit);
