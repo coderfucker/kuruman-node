@@ -72,7 +72,7 @@ app.get('/login', routes.user.login);
 app.post('/login', routes.user.authenticate);
 app.get('/logout', routes.user.logout);
 app.get('/admin', authorize, routes.article.admin);
-app.get('/post', authorize,routes.article.post);
+app.get('/post', authorize, routes.article.post);
 app.post('/post', authorize, routes.article.postArticle);
 app.get('/articles/:slug', routes.article.show);
 

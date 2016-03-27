@@ -3,19 +3,19 @@ extends layout
 block page
   - var menu = 'post';
 block content
-h2 Post an Article
-div= error
-div.col-md-8
-  form(action='/post', method='POST', role='form')
-    div.form-group
-      label(for='title') Title
-      input#title.form-control(name='title', type='text', placeholder='js is good')
-    div.form-group
-      label(for='slug') slug
-      input#slug.form-control(name='slug', type='text', placeholder='js-goog')
-      span.help-block This string will be used in the URL.
-    div.form-group
-      label(for='text') Text
-      textarea#text.form-control(rows='5', name='text', placeholder='text')
-    p
-      button.btn.btn-primary(type='submit') Save
+  h2 Post an Article
+  div= error
+  div.col-md-8
+    form(action='/post', method='POST', role='form')
+      div.form-group
+        label(for='title') Title
+        input#title.form-control(name='title', type='text', placeholder='js is good')
+      div.form-group
+        label(for='slug') slug
+        input#slug.form-control(name='slug', type='text', placeholder='js-goog')
+        span.help-block This string will be used in the URL.
+      div.form-group
+        label(for='text') Text
+        textarea#text.form-control(rows='5', name='text', placeholder='text')
+      p
+        button.btn.btn-primary(type='submit') Save

@@ -11,6 +11,7 @@ exports.show = function(req, res, next) {
 // get articles api
 exports.list = function(req, res, next) {
   req.collections.articles.find({}).toArray(function(error, articles){
+    console.log('find articles', articles);
     if(error) return next(error);
     res.send({articles: articles});
   });
@@ -70,8 +71,8 @@ exports.postArticle = function(req, res, next){
 
 // get admin page
 exports.admin = function(req, res, next){
-  console.log('article', req.session);
   req.collections.articles.find({}, {sort: {_id: -1}}).toArray(function(error, articles){
+    console.log('admin find articles', articles);
     if(error) return next(error);
     res.render('admin', {articles: articles});
   });
